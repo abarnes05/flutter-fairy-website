@@ -1,0 +1,355 @@
+body {
+    /* Remove gap from edge of website */
+    margin: 0;
+    /* Set font for the entire website */
+    /* font-family: Tahoma, sans-serif; */
+    font-family: "Press Start 2P", monospace;
+    /* Add background image */
+    background-image: url("textures/web-bg.jpeg");
+    /* Repeat image */
+    background-repeat: repeat;
+    /* Automatically adjust size w/ the window */
+    background-size: auto;
+}
+
+.main-container {
+    /* Use flexbox layout */
+    display: flex;
+    /* Arrange children in a column */
+    flex-direction: column;
+    /* Set height to fill viewport */
+    height: 100vh;
+    /* Horizontally center content w/in container */
+    justify-content: center;
+    /* Vertically center conent w/in container */
+    align-items: center;
+}
+
+/* Container takes all remaining space above nav */
+.container {
+    /* Takes up 9/10 of main container */
+    flex: 9;
+    /* Width of game container (width of screen) */
+    width: 100%;
+    position: relative;
+    /* Horizontally center content within game container */
+    justify-content: center;
+    /* Vertically center content within game container */
+    align-items: center;
+}
+
+/* Retro panel */
+.retro-panel {
+    width: 420px;
+    padding: 18px;
+    background: linear-gradient(180deg,#ffb6d3 0%,#ff9fc4 100%);
+    border: 6px solid #5b2b5c;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
+    font-family: "Press Start 2P", monospace;
+    color: #111;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+/* Inner card of retro panel */
+.retro-card {
+    width: 100%;
+    background: #e6e6e6;
+    padding: 14px;
+    border: 4px solid #8a8a8a;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.retro-panel h2 {
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+/* Input row */
+.input-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.retro-input {
+    flex: 1;
+    min-width: 160px;
+    padding: 10px 12px;
+    border: 3px solid #5b2b5c;
+    outline: none;
+    font-family: inherit;
+    font-size: 12px;
+    background: #fff;
+    box-shadow: inset 0 -3px 0 rgba(0,0,0,0.06);
+    border-radius: 4px;
+}
+
+.helper {
+    font-size: 10px;
+    color: #333;
+    text-align: center;
+    margin-top: -6px;
+}
+
+/* Button row */
+.button-row {
+    display:flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Button */
+.retro-btn {
+    padding: 8px 14px;
+    border: 4px solid #5b2b5c;
+    background: linear-gradient(180deg,#fff 0%,#f0f0f0 100%);
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.12);
+}
+.retro-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+}
+
+.retro-btn.cancel {
+    background: linear-gradient(180deg,#ffd4d4 0%,#ffc6c6 100%);
+}
+
+.retro-btn.primary {
+    background: linear-gradient(180deg,#cfe8ff 0%,#b4dbff 100%);
+}
+
+/* End screen overlay */
+.overlay-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Allow clicking canvas unless popup is shown */
+    pointer-events: none;
+}
+
+/* End screen */
+#end-screen {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 640px;
+    height: 480px;
+    background-color: rgba(0, 0, 0, 0.7);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 20px;
+    z-index: 10;
+    /* Allow interaction */
+    pointer-events: auto;
+}
+
+/* End screen button */
+#end-screen button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Leaderboard form */
+#leaderboard-form {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    z-index: 20;
+    /* Allow interaction */
+    pointer-events: auto;
+}
+
+/* Game canvas fills container */
+#game-canvas {
+    width: 640px;
+    height: 480px;
+    /* Border */
+    border: 4px solid black;
+    /* Canvas background color */
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+
+/* Container that holds text */
+#text-container {
+    /* Takes up 9/10 of main container */
+    flex: 9;
+    display: flex;
+    /* Add space between the container and the edge of the website */
+    margin: 20px;
+    /* Add space between the edge of the container and its contents */
+    padding: 20px;
+    /* Set the color of the container */
+    background-color: #ddd;
+    /* Make the edges of the container rounded */
+    border-radius: 10px;
+    /* Set the font */
+    font-family: Tahoma, sans-serif;
+}
+
+/* Navigation bar */
+nav {
+    /* Takes up 1/10 of main container */
+    flex: 1;
+    /* Width of navbar (width of screen) */
+    width: 100%;
+    /* Flex display */
+    display: flex;
+    /* Left align the nav-containers w/in the navbar */
+    justify-content: flex-start;
+    /* Make the nav-containers stretch to the height of the navbar */
+    align-items: stretch;
+    /* Remove space between the navbar and the edge of the website */
+    margin: 0;
+    /* Remove space between the edge of the navbar and its contents */
+    padding: 0;
+    /* Navbar background color */
+    background-color: #e9bbcd;
+    /* Create a border around container */
+    border-style: solid;
+    /* Set border width */
+    border-width: 2px;
+}
+
+/* Container to hold navbar links */
+.nav-container {
+    /* Flex display */
+    display: flex;
+    /* Vertically center the contents of the nav-container */
+    align-items: center;
+    
+}
+
+/* Hover effects for navbar containers */
+.nav-container:hover {
+    /* Change background color on hover to gray */
+    background-color: #ddd;
+    /* Make font bold on hover */
+    font-weight: bold;
+    /* Add extra padding on hover */
+    padding: 0 4px;
+}
+
+/* Navbar links */
+.nav-container a {
+    /* Block display */
+    display: block;
+    /* Add space between the edge of the container and its contents */
+    padding: 14px 16px;
+    /* Set font and font size */
+    font-family: "Press Start 2P", monospace;
+    font-size: 12px;
+}
+
+/* Hover effects for navbar links */
+.nav-container a:hover {
+    /* Make font color black on hover */
+    color: black;
+}
+
+/* Active navbar container effects */
+.nav-container.active,
+.nav-container.active a {
+    /* When container is active, make bg darker pink */
+    background-color: #f39cbd;
+    /* Make font bold */
+    font-weight: bold;
+    color: black;
+}
+
+/* Media query for navbar */
+@media (max-width: 600px) {
+    nav {
+        justify-content: center;
+        align-items: stretch;   
+    }
+
+    .nav-container {
+        width: 100%;              
+    }
+
+    .nav-container a {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 10px;
+    }
+}
+
+/* Container that holds leaderboard table */
+.table-container {
+    display: flex;   
+    /* Horizontally center the table within container */       
+    justify-content: center;
+    /* Add space between the container and the edge of the website */
+    margin: 20px 0; 
+}
+
+/* Leaderboard table */
+table {
+    width: 80%;
+    max-width: 600px; 
+    /* Remove double borders */
+    border-collapse: collapse;
+    /* Left align all text within table */
+    text-align: left;
+    /* Set the background color of table */
+    background-color: #ddd;
+    /* Make the edges of the table rounded */
+    border-radius: 10px;
+    /* Fix rounded corners */
+    overflow: hidden; 
+    
+}
+
+/* Table heading */
+table th {
+    /* Set the background color of the table header */
+    background-color: #f39cbd;
+    /* Set the font color */
+    color: black;
+}
+
+/* Table cells */
+table th,
+table td {
+    /* Add space inside cells */
+    padding: 12px 15px;
+    /* Add bottom borders to cells */
+    border-bottom: 1px solid #bbb;
+}
+
+/* Hover effects for table cells */
+table tbody tr:hover {
+    /* Change background color of cell on hover */
+    background-color: #e9bbcd;
+}

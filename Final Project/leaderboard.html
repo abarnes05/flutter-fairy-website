@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P">
+</head>
+<body>
+    <!-- Container to hold game container and navbar -->
+    <div class="main-container">
+        <h2>Leaderboard</h2>
+        <!-- Container to hold game canvas and end screen popup -->
+        <div class="container">
+            <div class="table-container">
+                <table id="leaderboardTable">
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Score</th>
+                    </tr>
+                </table>
+
+                <script>
+                    function loadLeaderboard() {
+                        const table = document.getElementById("leaderboardTable");
+                        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+                        // Sort scores (optional)
+                        leaderboard.sort((a, b) => b.score - a.score);
+
+                        const MAX_ROWS = 10;
+
+                        for (let i = 0; i < MAX_ROWS; i++) {
+                            if (leaderboard[i]) {
+                                const row = table.insertRow();
+                                row.insertCell().textContent = i + 1;
+                                row.insertCell().textContent = leaderboard[i].name;
+                                row.insertCell().textContent = leaderboard[i].score;
+                            }
+                            else {
+                                const row = table.insertRow();
+                                row.insertCell().textContent = i + 1;
+                                row.insertCell().textContent = "   ";
+                                row.insertCell().textContent = " ";
+                            }
+                        }
+                    }
+
+                    loadLeaderboard();
+                </script>
+            </div>
+        </div>
+        
+        <!-- Navigation Bar -->
+        <nav>
+            <!-- Game Page Link -->
+            <div class="nav-container">
+                <a href="index.html">Game</a>
+            </div>
+            
+            <!-- How To Play Page Link -->
+            <div class="nav-container">
+                <a href="how-to-play.html">How To Play</a>
+            </div>
+
+            <!-- Leaderboard Link -->
+            <div class="nav-container active">
+                <a href="leaderboard.html">Leaderboard</a>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>
